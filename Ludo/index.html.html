@@ -1,0 +1,1661 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Royal Ludo Game</title>
+        <style>
+            body{
+                background-color:black;
+                margin:0px;
+            }
+            .ludoMainLayout{
+                width:760px;
+                height:760px;
+                background-color:white;
+                margin-left:200px;
+            }
+
+            .innerWhite{
+                width:200px;
+                height:200px;
+                margin-left:50px;
+                margin-top:50px;
+                background-color:white;
+                position: absolute;
+            }
+
+            .c1, .c2, .c3, .c4{
+                width:70px;
+                height:70px;
+                border-radius:50%;
+                position:absolute;
+            }
+            #boxRed .c1, #boxRed .c2, #boxRed .c3, #boxRed .c4{background-color:red;}
+            #boxGreen .c1, #boxGreen .c2, #boxGreen .c3, #boxGreen .c4{background-color:green;}
+            #boxBlue .c1, #boxBlue .c2, #boxBlue .c3, #boxBlue .c4{background-color:blue;}
+            #boxYellow .c1,  #boxYellow .c2,  #boxYellow .c3,  #boxYellow .c4{background-color:yellow;
+            }
+            .c1{margin-left:15px;margin-top:15px;}
+            .c2{margin-left:115px;margin-top:15px;}
+            .c3{margin-left:15px;margin-top:115px;}
+            .c4{margin-left:115px;margin-top:115px;}
+
+            #boxRed{
+                width:300px;
+                height:300px;
+                position: absolute;
+                background-color:rgba(250, 0, 0, 0.600); /*0.600*/
+            }
+
+            #boxGreen{
+                width:300px;
+                height:300px;
+                position: absolute;
+                background-color:rgba(0, 128, 0, 1);
+                margin-left:460px;
+            }
+
+            #boxBlue{
+                width:300px;
+                height:300px;
+                position: absolute;
+                background-color:rgba(0, 0, 255, 1);
+                margin-top:460px;
+            }
+
+            #boxYellow{
+                width:300px;
+                height:300px;
+                position: absolute;
+                background-color:rgba(255, 255, 0, 1);
+                margin-top:460px;
+                margin-left:460px;
+            }
+
+            .middle{
+                width:163px;
+                height:163px;
+                position:absolute;
+                background-color:white;
+                margin-top:300px;
+                margin-left:298px;
+            }
+            .tri1{
+                width:0px;
+                height:0px;
+                position: absolute;
+                border-left:81px solid transparent;
+                border-right:81px solid transparent;
+                border-top:80px solid green;
+            }
+            .tri2{
+                width:0px;
+                height:0px;
+                position: absolute;
+                border-left:82px solid transparent;
+                border-right:82px solid transparent;
+                border-bottom:80px solid blue;
+                margin-top:80px;
+            }
+            .tri3{
+                width:0px;
+                height:0px;
+                position: absolute;
+                border-top:82px solid transparent;
+                border-bottom:82px solid transparent;
+                border-left:81px solid red;
+                margin-top:-2.5px;
+            }
+            .tri4{
+                width:0px;
+                height:0px;
+                position: absolute;
+                border-top:82px solid transparent;
+                border-bottom:82px solid transparent;
+                border-right:80px solid yellow;
+                margin-top:-2.5px;
+                margin-left:83px;
+            }
+
+            #box1{
+                width:53px;
+                height:53px;
+                position:absolute;
+                border:2px solid black;
+                margin-left:305px;
+            }
+            #box2{
+                width:53px;
+                height:53px;
+                position:absolute;
+                border:2px solid black;
+                margin-left:355px;
+            }
+            #box3{
+                width:53px;
+                height:53px;
+                position:absolute;
+                border:2px solid black;
+                margin-left:405px;
+            }
+
+            .tableInRG{
+                width:160px;
+                height:300px;
+                position:absolute;
+                margin-left:300px;
+                border-collapse: collapse;
+            }
+
+            .tableInRB{
+                width:300px;
+                height:160px;
+                position:absolute;
+                margin-top:300px;
+                border-collapse: collapse;
+            }
+
+            .tableInGY{
+                width:300px;
+                height:160px;
+                position:absolute;
+                margin-top:300px;
+                margin-left:460px;
+                border-collapse: collapse;
+            }
+            
+            .tableInBY{
+                width:160px;
+                height:300px;
+                position:absolute;
+                margin-left:300px;
+                margin-top:460px;
+                border-collapse: collapse;
+            }
+            
+            
+            td{border:2px solid black;}
+            #b1{background-color:green;}
+            #b14{background-color:yellow;}
+            #b27{background-color:blue;}
+            #b40{background-color:red;}
+            #b48,#b9,#b22,#b35{background-color:rgb(165, 157, 157);}
+
+            #r1,#r2,#r3,#r4,#r5{background-color:red;}
+
+            #g1,#g2,#g3,#g4,#g5{background-color:green;}
+
+            #bu1,#bu2,#bu3,#bu4,#bu5{background-color: blue;}
+
+            #y1,#y2,#y3,#y4,#y5{background-color:yellow;}
+            
+
+            /*################################################ This is for the coins style of the game ##########################################################*/
+            
+            #RC1,#RC2,#RC3,#RC4,#GC1,#GC2,#GC3,#GC4,#BC1,#BC2,#BC3,#BC4,#YC1,#YC2,#YC3,#YC4{
+                position:absolute;
+                width:40px;
+                height:40px;
+                border-radius:30px;
+                margin-left:15px;
+                margin-top:15px;
+                border:1px solid black;
+                transition:0.5s;
+            }
+            #RC1,#RC2,#RC3,#RC4{background-color:rgb(238, 39, 32);}
+            #GC1,#GC2,#GC3,#GC4{background-color:rgb(167, 182, 81);}
+            #BC1,#BC2,#BC3,#BC4{background-color:rgb(80, 133, 231);}
+            #YC1,#YC2,#YC3,#YC4{background-color:rgb(228, 240, 66);}
+
+            #RC1{margin-top:-680px; margin-left:280px; z-index:0;}
+            #RC2{margin-top:-680px; margin-left:380px; z-index:0;}
+            #RC3{margin-top:-580px; margin-left:280px; z-index:0;}
+            #RC4{margin-top:-580px; margin-left:380px; z-index:0;}
+
+            #GC1{margin-top:-680px; margin-left:740px; z-index:0;}
+            #GC2{margin-top:-680px; margin-left:840px; z-index:0;}
+            #GC3{margin-top:-580px; margin-left:740px; z-index:0;}
+            #GC4{margin-top:-580px; margin-left:840px; z-index:0;}
+
+            #BC1{margin-top:-220px; margin-left:280px; z-index:0;}
+            #BC2{margin-top:-220px; margin-left:380px; z-index:0;}
+            #BC3{margin-top:-120px; margin-left:280px; z-index:0;}
+            #BC4{margin-top:-120px; margin-left:380px; z-index:0;}
+
+            #YC1{margin-top:-220px; margin-left:740px; z-index:0;}
+            #YC2{margin-top:-220px; margin-left:840px; z-index:0;}
+            #YC3{margin-top:-120px; margin-left:740px; z-index:0;}
+            #YC4{margin-top:-120px; margin-left:840px; z-index:0;}
+
+            /*################################################### This is for the ludo dice part##################################################################*/
+
+            #one, #two ,#three ,#four ,#five,#six{
+                width:50px;
+                height:50px;
+                position: absolute;
+                background:hsla(0, 85% , 50% ,0.9);
+                margin:0 auto;
+                display:block;
+                padding:50px 50px;
+                border:1px solid #fdb0b09c;
+            }
+            #one{transform:translateZ(75px);}
+            #two{transform:rotateY(-90deg) translateZ(75px);}
+            #three{transform: rotateY(90deg) translateZ(75px);}
+            #four{transform:rotateX(-90deg) translateZ(75px);}
+            #five{transform:rotateX(90deg) translateZ(75px);}
+            #six{transform:rotateX(-180deg) translateZ(75px);}
+
+            #cube{
+                width:100%;
+                height:100%;
+                position: absolute;
+                transform-style: preserve-3d;
+                top:250px;
+                transition: transform 3s;
+            }
+            .main{
+                width:200px;
+                height:200px;
+                position:absolute;
+                margin-top:-700px;
+                margin-left:1200px;
+                perspective:1000px;
+                perspective-origin: 50% 100%;
+            }
+
+            #one div ,#two div ,#three div ,#four div,#five div,#six div{
+                width:30px;
+                height:30px;
+                border-radius:30px;
+                background-color:white;
+               
+            }
+
+            .one1{margin-left:10px;margin-top:10px;}
+
+            .two1{margin-top:-15px;margin-left:10px;}
+            .two2{margin-top:20px;margin-left:10px;}
+
+            .three1{margin-top:-15px;margin-left:13px;position: absolute;}
+            .three2{margin-top:50px;margin-left:-30px;position: absolute;}
+            .three3{margin-top:50px;margin-left:55px;position: absolute;}
+
+            .four1{margin-top:-25px;margin-left:-30px;position:absolute;}
+            .four2{margin-top:40px;margin-left:-30px;position:absolute;}
+            .four3{margin-top:-27px;margin-left:30px;position:absolute;}
+            .four4{margin-top:35px;margin-left:30px;position:absolute;}
+
+            .five1{margin-top:-25px;margin-left:-30px;position:absolute;}
+            .five2{margin-top:-25px;margin-left:55px;position:absolute;}
+            .five3{margin-top:15px;margin-left:10px;position:absolute;}
+            .five4{margin-top:57px;margin-left:-28px;position:absolute;}
+            .five5{margin-top:57px;margin-left:55px;position:absolute;}
+
+            .six1{margin-left:-30px;margin-top:-30px;position: absolute;}
+            .six2{margin-left:-30px;margin-top:15px;position: absolute;}
+            .six3{margin-left:-30px;margin-top:60px;position: absolute;}
+            .six4{margin-left:55px;margin-top:-30px;position: absolute;}
+            .six5{margin-left:55px;margin-top:15px;position: absolute;}
+            .six6{margin-left:55px;margin-top:60px;position: absolute;}
+            
+        </style>
+    </head>
+    <body onload="takePlayerNum()">
+
+        <div class="ludoMainLayout">
+            <!--RC,GC,BC,YC are coins of the game-->
+            <div id="boxRed"><div class="innerWhite">
+                <div class="c1"></div>
+                <div class="c2"></div>
+                <div class="c3"></div>
+                <div class="c4"></div>
+            </div></div>
+            <div id="boxGreen"><div class="innerWhite">
+                <div class="c1"></div>
+                <div class="c2"></div>
+                <div class="c3"></div>
+                <div class="c4"></div>
+            </div></div>
+            <div id="boxBlue"><div class="innerWhite">
+                <div class="c1"></div>
+                <div class="c2"></div>
+                <div class="c3"></div>
+                <div class="c4"></div>
+            </div></div>
+            <div id="boxYellow"><div class="innerWhite">
+                <div class="c1"></div>
+                <div class="c2"></div>
+                <div class="c3"></div>
+                <div class="c4"></div>
+            </div></div>
+            <div class="middle">
+                <div class="tri1"></div>
+                <div class="tri2"></div>
+                <div class="tri3"></div>
+                <div class="tri4"></div>
+            </div>
+
+            <!--Now we adding the box cells-->
+            <table class="tableInRG">
+                <tr>
+                    <td id="b50"></td>
+                    <td id="b51"></td>
+                    <td id="b52"></td>
+                </tr>
+                <tr>
+                    <td id="b49"></td>
+                    <td id="g1"></td>
+                    <td id="b1"></td>
+                </tr>
+                <tr>
+                    <td id="b48"></td>
+                    <td id="g2"></td>
+                    <td id="b2"></td>
+                </tr>
+                <tr>
+                    <td id="b47"></td>
+                    <td id="g3"></td>
+                    <td id="b3"></td>
+                </tr>
+                <tr>
+                    <td id="b46"></td>
+                    <td id="g4"></td>
+                    <td id="b4"></td>
+                </tr>
+                <tr>
+                    <td id="b45"></td>
+                    <td id="g5"></td>
+                    <td id="b5"></td>
+                </tr>
+            
+            </table>
+
+            <table class="tableInRB">
+                <tr>
+                    <td id="b39"></td>
+                    <td id="b40"></td>
+                    <td id="b41"></td>
+                    <td id="b42"></td>
+                    <td id="b43"></td>
+                    <td id="b44"></td>
+                </tr>
+                <tr>
+                    <td id="b38"></td>
+                    <td id="r1"></td>
+                    <td id="r2"></td>
+                    <td id="r3"></td>
+                    <td id="r4"></td>
+                    <td id="r5"></td>
+                </tr>
+                <tr>
+                    <td id="b37"></td>
+                    <td id="b36"></td>
+                    <td id="b35"></td>
+                    <td id="b34"></td>
+                    <td id="b33"></td>
+                    <td id="b32"></td>
+                </tr>
+            
+            </table>
+
+            <table class="tableInGY">
+                <tr>
+                    <td id="b6"></td>
+                    <td id="b7"></td>
+                    <td id="b8"></td>
+                    <td id="b9"></td>
+                    <td id="b10"></td>
+                    <td id="b11"></td>
+                </tr>
+                <tr>
+                    <td id="y5"></td>
+                    <td id="y4"></td>
+                    <td id="y3"></td>
+                    <td id="y2"></td>
+                    <td id="y1"></td>
+                    <td id="b12"></td>
+                </tr>
+                <tr>
+                    <td id="b18"></td>
+                    <td id="b17"></td>
+                    <td id="b16"></td>
+                    <td id="b15"></td>
+                    <td id="b14"></td>
+                    <td id="b13"></td>
+                </tr>
+            
+            </table>
+
+            <table class="tableInBY">
+                <tr>
+                    <td id="b31"></td>
+                    <td id="bu5"></td>
+                    <td id="b19"></td>
+                </tr>
+                <tr>
+                    <td id="b30"></td>
+                    <td id="bu4"></td>
+                    <td id="b20"></td>
+                </tr>
+                <tr>
+                    <td id="b29"></td>
+                    <td id="bu3"></td>
+                    <td id="b21"></td>
+                </tr>
+                <tr>
+                    <td id="b28"></td>
+                    <td id="bu2"></td>
+                    <td id="b22"></td>
+                </tr>
+                <tr>
+                    <td id="b27"></td>
+                    <td id="bu1"></td>
+                    <td id="b23"></td>
+                </tr>
+                <tr>
+                    <td id="b26"></td>
+                    <td id="b25"></td>
+                    <td id="b24"></td>
+                </tr>
+            
+            </table>
+        </div>
+     
+
+        <!--This is for the ludo dice-->
+        <div class="main">
+            <div id="cube" onclick="Roll()">
+                <div id="one"><div class="one1"></div></div>
+                <div id="two"><div class="two1"></div><div class="two2"></div></div>
+                <div id="three"><div class="three1"></div><div class="three2"></div><div class="three3"></div></div>
+                <div id="four"><div class="four1"></div><div class="four2"></div><div class="four3"></div><div class="four4"></div></div>
+                <div id="five"><div class="five1"></div><div class="five2"></div><div class="five3"></div><div class="five4"></div><div class="five5"></div></div>
+                <div id="six"><div class="six1"></div><div class="six2"></div><div class="six3"></div><div class="six4"></div><div class="six5"></div><div class="six6"></div></div>
+             </div>
+        </div>
+
+        <!-- This is for the ludo coins-->
+        <div id="RC1" onclick="move(this.id)"></div> <div id="RC2" onclick="move(this.id)"></div> <div id="RC3" onclick="move(this.id)"></div> <div id="RC4" onclick="move(this.id)"></div>
+        <div id="GC1" onclick="move(this.id)"></div> <div id="GC2" onclick="move(this.id)"></div> <div id="GC3" onclick="move(this.id)"></div> <div id="GC4" onclick="move(this.id)"></div>
+        <div id="BC1" onclick="move(this.id)"></div> <div id="BC2" onclick="move(this.id)"></div> <div id="BC3" onclick="move(this.id)"></div> <div id="BC4" onclick="move(this.id)"></div>
+        <div id="YC1" onclick="move(this.id)"></div> <div id="YC2" onclick="move(this.id)"></div> <div id="YC3" onclick="move(this.id)"></div> <div id="YC4" onclick="move(this.id)"></div>
+
+
+    <!--This is for the java script code-->
+        <script>
+            //here are all the global variables
+            var diceRollNum=0;
+            var prevDiceRollNum=0;
+            var diceSound=document.createElement('audio');
+            var turnNum=1;//red=1
+            var isdiceRoll=false;
+            var VirtualDiceNum=0;
+            var playerNum=4;
+            var numplay=0;//This variable is to ensure that the number of times we click on a single dice thrown
+            var Rout=0, Gout=0, Bout=0, Yout=0;// This variables refers to the how many coins of Red, green , blue and yellow is on the outside from its home  
+            diceSound.src="dicerollsound.wav";
+            var Rwin=0,Gwin=0,Bwin=0,Cwin=0;//These variables are for the count of how many coins of each color gets win.
+            var RSafe=[true,true,true,true];
+            var GSafe=[true,true,true,true];
+            var YSafe=[true,true,true,true];
+            var BSafe=[true,true,true,true];//These arrays are for the count of that is the coin is  in the safe position or not 
+
+                function takePlayerNum()
+                {
+                    playerNum=prompt("Enter How many players will play the game (min 2 & max 4)");
+                }
+
+                function Roll()
+                {   diceSound.play();
+                    prevDiceRollNum=diceRollNum;
+                    diceRollNum=(Math.floor(Math.random()*(6))+1);      
+                    VirtualDiceNum=diceRollNum;
+                    if(diceRollNum==1)
+                    document.getElementById("cube").style.transform='rotateX('+1800+'deg) rotateY('+720+'deg)';
+                    else if(diceRollNum==2)
+                    document.getElementById("cube").style.transform='rotateX('+1080+'deg) rotateY('+1530+'deg)';
+                    else if(diceRollNum==3)
+                    document.getElementById("cube").style.transform='rotateX('+720+'deg) rotateY('+1350+'deg)';
+                    else if(diceRollNum==4)
+                    document.getElementById("cube").style.transform='rotateX('+1530+'deg) rotateY('+630+'deg)';
+                    else if(diceRollNum==5)
+                    document.getElementById("cube").style.transform='rotateX('+270+'deg) rotateY('+720+'deg)';
+                    else if(diceRollNum==6)
+                    document.getElementById("cube").style.transform='rotateX('+2160+'deg) rotateY('+540+'deg)';
+
+                    isdiceRoll=true;
+                    numplay=0;
+                    setTimeout(turnFun,3000);
+                    
+
+                }
+
+                //This part is for the changing the turn of the players
+                function turnFun()
+                {   
+                    if((turnNum>=playerNum && diceRollNum!=6 && Bout==0 && playerNum==4) || (turnNum>=playerNum && diceRollNum!=6 && Gout==0 && playerNum==2) || (turnNum>=playerNum && diceRollNum!=6 && Yout==0 && playerNum==3)) 
+                    turnNum=0; 
+
+                    if(diceRollNum!=6 && ((turnNum==1 && Rout==0) || (turnNum==2 && Gout==0) ||(turnNum==3 && Yout==0) || (turnNum==4 && Bout==0)) && prevDiceRollNum!=6)
+                        turnNum++;
+                   
+                    if(turnNum==0)
+                        turnNum=1;
+
+                    console.log("T "+turnNum);
+                    turnFunCon();
+                }
+            
+                //This is the part of the turnFun() function and I just separate it for call it from a different body with out effecting the process of exceqution
+                
+                function turnFunCon()// stands for turnFun() functions changing background conditional part
+                {  console.log("In Funcon "+turnNum);
+                   if(playerNum==4)
+                   { 
+                    if(turnNum==1)
+                        {
+                            document.getElementById("boxRed").style.background="rgba(255,0,0,0.600)";
+                            document.getElementById("boxBlue").style.background="rgba(0,0,255,1)";
+
+                            document.getElementById("RC1").style.zIndex="1";
+                            document.getElementById("RC2").style.zIndex="1";
+                            document.getElementById("RC3").style.zIndex="1";
+                            document.getElementById("RC4").style.zIndex="1";
+
+                            document.getElementById("BC1").style.zIndex="0";
+                            document.getElementById("BC2").style.zIndex="0";
+                            document.getElementById("BC3").style.zIndex="0";
+                            document.getElementById("BC4").style.zIndex="0";
+                        }
+                    else if(turnNum==2)
+                        {
+                            document.getElementById("boxGreen").style.background="rgba(0,128,0,0.600)";
+                            document.getElementById("boxRed").style.background="rgba(255,0,0,1)";
+
+                            document.getElementById("GC1").style.zIndex="1";
+                            document.getElementById("GC2").style.zIndex="1";
+                            document.getElementById("GC3").style.zIndex="1";
+                            document.getElementById("GC4").style.zIndex="1";
+
+                            document.getElementById("RC1").style.zIndex="0";
+                            document.getElementById("RC2").style.zIndex="0";
+                            document.getElementById("RC3").style.zIndex="0";
+                            document.getElementById("RC4").style.zIndex="0";
+                        }
+                    else if(turnNum==3)
+                        {
+                            document.getElementById("boxYellow").style.background="rgba(255,255,0,0.600)";
+                            document.getElementById("boxGreen").style.background="rgba(0,128,0,1)";
+
+                            document.getElementById("YC1").style.zIndex="1";
+                            document.getElementById("YC2").style.zIndex="1";
+                            document.getElementById("YC3").style.zIndex="1";
+                            document.getElementById("YC4").style.zIndex="1";
+
+                            document.getElementById("GC1").style.zIndex="0";
+                            document.getElementById("GC2").style.zIndex="0";
+                            document.getElementById("GC3").style.zIndex="0";
+                            document.getElementById("GC4").style.zIndex="0";
+                        }
+                    else if(turnNum==4)
+                        {
+                            document.getElementById("boxBlue").style.background="rgba(0,0,255,0.600)";
+                            document.getElementById("boxYellow").style.background="rgba(255,255,0,1)";
+
+                            document.getElementById("BC1").style.zIndex="1";
+                            document.getElementById("BC2").style.zIndex="1";
+                            document.getElementById("BC3").style.zIndex="1";
+                            document.getElementById("BC4").style.zIndex="1";
+
+                            document.getElementById("YC1").style.zIndex="0";
+                            document.getElementById("YC2").style.zIndex="0";
+                            document.getElementById("YC3").style.zIndex="0";
+                            document.getElementById("YC4").style.zIndex="0";
+                        }
+                   }
+                   else if(playerNum==2)
+                   {
+                    if(turnNum==1)
+                        {
+                            document.getElementById("boxRed").style.background="rgba(255,0,0,0.600)";
+                            document.getElementById("boxGreen").style.background="rgba(0,128,0,1)";
+
+                            document.getElementById("RC1").style.zIndex="1";
+                            document.getElementById("RC2").style.zIndex="1";
+                            document.getElementById("RC3").style.zIndex="1";
+                            document.getElementById("RC4").style.zIndex="1";
+
+                            document.getElementById("GC1").style.zIndex="0";
+                            document.getElementById("GC2").style.zIndex="0";
+                            document.getElementById("GC3").style.zIndex="0";
+                            document.getElementById("GC4").style.zIndex="0";
+                        }
+                    else if(turnNum==2)
+                        {
+                            document.getElementById("boxGreen").style.background="rgba(0,128,0,0.600)";
+                            document.getElementById("boxRed").style.background="rgba(255,0,0,1)";
+
+                            document.getElementById("GC1").style.zIndex="1";
+                            document.getElementById("GC2").style.zIndex="1";
+                            document.getElementById("GC3").style.zIndex="1";
+                            document.getElementById("GC4").style.zIndex="1";
+
+                            document.getElementById("RC1").style.zIndex="0";
+                            document.getElementById("RC2").style.zIndex="0";
+                            document.getElementById("RC3").style.zIndex="0";
+                            document.getElementById("RC4").style.zIndex="0";
+                        }
+                   }
+
+                   else if(playerNum==3)
+                   {
+                    if(turnNum==1)
+                        {
+                            document.getElementById("boxRed").style.background="rgba(255,0,0,0.600)";
+                            document.getElementById("boxYellow").style.background="rgba(255,255,0,1)";
+
+                            document.getElementById("RC1").style.zIndex="1";
+                            document.getElementById("RC2").style.zIndex="1";
+                            document.getElementById("RC3").style.zIndex="1";
+                            document.getElementById("RC4").style.zIndex="1";
+
+                            document.getElementById("YC1").style.zIndex="0";
+                            document.getElementById("YC2").style.zIndex="0";
+                            document.getElementById("YC3").style.zIndex="0";
+                            document.getElementById("YC4").style.zIndex="0";
+                        }
+                    else if(turnNum==2)
+                        {
+                            document.getElementById("boxGreen").style.background="rgba(0,128,0,0.600)";
+                            document.getElementById("boxRed").style.background="rgba(255,0,0,1)";
+
+                            document.getElementById("GC1").style.zIndex="1";
+                            document.getElementById("GC2").style.zIndex="1";
+                            document.getElementById("GC3").style.zIndex="1";
+                            document.getElementById("GC4").style.zIndex="1";
+
+                            document.getElementById("RC1").style.zIndex="0";
+                            document.getElementById("RC2").style.zIndex="0";
+                            document.getElementById("RC3").style.zIndex="0";
+                            document.getElementById("RC4").style.zIndex="0";
+                        }
+                    else if(turnNum==3)
+                        {
+                            document.getElementById("boxYellow").style.background="rgba(255,255,0,0.600)";
+                            document.getElementById("boxGreen").style.background="rgba(0,128,0,1)";
+
+                            document.getElementById("YC1").style.zIndex="1";
+                            document.getElementById("YC2").style.zIndex="1";
+                            document.getElementById("YC3").style.zIndex="1";
+                            document.getElementById("YC4").style.zIndex="1";
+
+                            document.getElementById("GC1").style.zIndex="0";
+                            document.getElementById("GC2").style.zIndex="0";
+                            document.getElementById("GC3").style.zIndex="0";
+                            document.getElementById("GC4").style.zIndex="0";
+                        }
+                   }
+                }
+
+
+            //This funciton is for to move the coins and kill other coins that take its position
+            function move(Id)
+            {    
+                 var element=document.getElementById(Id);
+                 var style=getComputedStyle(element);
+                 var posMarginLeft=pixNum(style.marginLeft);
+                 var posMarginTop=pixNum(style.marginTop);
+
+                 var finalDiceNum=(505-posMarginLeft)/50;//This variable is for the final specific dice number required to go to its the home.
+                 
+                if(isdiceRoll==true)
+                {   
+                    if(turnNum==1 &&(Id=="RC1" || Id=="RC2" || Id=="RC3" || Id=="RC4"))
+                    {  
+                        if(diceRollNum==6  && (posMarginTop==-680 || posMarginTop==-580) && (posMarginLeft==280 || posMarginLeft==380) && numplay==0)
+                        {    
+                             document.getElementById(Id).style.marginTop="-455px";
+                             document.getElementById(Id).style.marginLeft="255px";
+                             Rout++;
+                             isdiceRoll=false;
+                             numplay++;
+                        }
+                        else if(numplay==0 && Rout>0)
+                        {
+                            for(var i=1;i<=diceRollNum;i++)
+                            {   
+                                if(posMarginTop==-455 && posMarginLeft<455)
+                                {
+                                    element.style.marginLeft=(posMarginLeft+50)+"px";
+                                        posMarginLeft+=50;
+                                }
+                                else if(posMarginTop==-455 && posMarginLeft==455)
+                                {
+                                    element.style.marginLeft=(posMarginLeft+50)+"px";
+                                        posMarginLeft+=50;
+                                    element.style.marginTop=(posMarginTop-50)+"px";
+                                        posMarginTop-=50;
+                                }
+                                else if(posMarginLeft==505 && posMarginTop>-755 && posMarginTop<-455)
+                                {
+                                    element.style.marginTop=(posMarginTop-50)+"px";
+                                        posMarginTop-=50;
+                                }
+                                //
+                                else if(posMarginTop==-755 && posMarginLeft<605)
+                                {
+                                    element.style.marginLeft=(posMarginLeft+50)+"px";
+                                        posMarginLeft+=50;
+                                }
+                                //
+                                else if(posMarginLeft==605 && posMarginTop<-505)
+                                {
+                                    element.style.marginTop=(posMarginTop+50)+"px";
+                                        posMarginTop+=50;
+                                }
+                                else if(posMarginLeft==605 && posMarginTop==-505)
+                                {
+                                    element.style.marginTop=(posMarginTop+50)+"px";
+                                        posMarginTop+=50;
+                                    element.style.marginLeft=(posMarginLeft+60)+"px";
+                                        posMarginLeft+=60;
+                                }
+                                else if(posMarginTop==-455 && posMarginLeft<915)
+                                {
+                                    element.style.marginLeft=(posMarginLeft+50)+"px";
+                                        posMarginLeft+=50;
+                                }
+                                //
+                                else if(posMarginLeft==915 && posMarginTop<-355)
+                                {
+                                    element.style.marginTop=(posMarginTop+50)+"px";
+                                        posMarginTop+=50;
+                                }
+                                //
+                                else if(posMarginTop==-355 && posMarginLeft>665)
+                                {
+                                    element.style.marginLeft=(posMarginLeft-50)+"px";
+                                        posMarginLeft-=50;
+                                }
+                                else if(posMarginTop==-355 && posMarginLeft==665)
+                                {
+                                    element.style.marginLeft=(posMarginLeft-50)+"px";
+                                        posMarginLeft-=50;
+                                    element.style.marginTop=(posMarginTop+60)+"px";
+                                        posMarginTop+=60;
+                                }
+                                else if(posMarginLeft==615 && posMarginTop<-45)
+                                {
+                                    element.style.marginTop=(posMarginTop+50)+"px";
+                                        posMarginTop+=50;
+                                }
+                                //
+                                else if(posMarginTop==-45 && posMarginLeft>505)
+                                {
+                                    element.style.marginLeft=(posMarginLeft-55)+"px";
+                                        posMarginLeft-=55;
+                                }
+                                //
+                                else if(posMarginLeft==505 && posMarginTop>-295)
+                                {
+                                    element.style.marginTop=(posMarginTop-50)+"px";
+                                        posMarginTop-=50;
+                                }
+                                else if(posMarginLeft==505 && posMarginTop==-295)
+                                {
+                                    element.style.marginTop=(posMarginTop-50)+"px";
+                                        posMarginTop-=50;
+                                    element.style.marginLeft=(posMarginLeft-50)+"px";
+                                        posMarginLeft-=50;
+                                }
+                                else if(posMarginTop==-345 && posMarginLeft>205)
+                                {
+                                    element.style.marginLeft=(posMarginLeft-50)+"px";
+                                        posMarginLeft-=50;
+                                        VirtualDiceNum--;
+                                }
+                                //########################### Entering into the home
+                                else if(posMarginTop==-345 && posMarginLeft==205)
+                                {
+                                    element.style.marginTop=(posMarginTop-55)+"px";
+                                        posMarginTop-=55;
+                                        VirtualDiceNum--;
+                                }
+                                //#############################
+                            }   
+                                //Remaining entering into the home
+                                if(posMarginTop==-400 && posMarginLeft<505)
+                                {   
+                                    if(VirtualDiceNum<=finalDiceNum)
+                                    {   element.style.marginLeft=(posMarginLeft+(VirtualDiceNum*50))+"px";
+                                        posMarginLeft+=(VirtualDiceNum*50);}
+                                }
+
+                                if(posMarginTop==-400 && posMarginLeft==505)
+                                    {Rwin++; Rout--;}
+
+                                if(prevDiceRollNum==6 && diceRollNum!=6)
+                                    {    
+                                         turnNum++;
+                                    }
+                                else if(prevDiceRollNum!=6 && diceRollNum!=6 && Rout>0)
+                                    {
+                                         turnNum++;
+                                    }
+                                turnFunCon();
+                                isdiceRoll=false;
+                                numplay++;
+                        }
+
+                        
+                    }
+
+                    finalDiceNum=(-455-(posMarginTop))/50;// For G's home coming
+                    if(turnNum==2 &&(Id=="GC1" || Id=="GC2" || Id=="GC3" || Id=="GC4"))
+                    {   
+                        if(diceRollNum==6  && (posMarginTop==-680 || posMarginTop==-580) && (posMarginLeft==740 || posMarginLeft==840) && numplay==0)
+                        {    
+                             document.getElementById(Id).style.marginTop="-705px";
+                             document.getElementById(Id).style.marginLeft="605px";
+                             Gout++;
+                             isdiceRoll=false;
+                             numplay++;
+                        }
+                        else if(numplay==0 && Gout>0)
+                        {     
+                            for(var i=1;i<=diceRollNum;i++)
+                            {   
+                                if(posMarginTop==-455 && posMarginLeft<455)
+                                {
+                                    element.style.marginLeft=(posMarginLeft+50)+"px";
+                                        posMarginLeft+=50;
+                                }
+                                else if(posMarginTop==-455 && posMarginLeft==455)
+                                {
+                                    element.style.marginLeft=(posMarginLeft+50)+"px";
+                                        posMarginLeft+=50;
+                                    element.style.marginTop=(posMarginTop-50)+"px";
+                                        posMarginTop-=50;
+                                }
+                                else if(posMarginLeft==505 && posMarginTop>-755 && posMarginTop<-455)
+                                {
+                                    element.style.marginTop=(posMarginTop-50)+"px";
+                                        posMarginTop-=50;
+                                        VirtualDiceNum--;
+                                }
+                                //############ Entering into the home part
+                                else if(posMarginTop==-755 && posMarginLeft==505)
+                                {
+                                    element.style.marginLeft=(posMarginLeft+50)+"px";
+                                        posMarginLeft+=50;
+                                        VirtualDiceNum--;
+                                }
+                                //############
+                                else if(posMarginLeft==605 && posMarginTop<-505)
+                                {
+                                    element.style.marginTop=(posMarginTop+50)+"px";
+                                        posMarginTop+=50;
+                                }
+                                else if(posMarginLeft==605 && posMarginTop==-505)
+                                {
+                                    element.style.marginTop=(posMarginTop+50)+"px";
+                                        posMarginTop+=50;
+                                    element.style.marginLeft=(posMarginLeft+60)+"px";
+                                        posMarginLeft+=60;
+                                }
+                                else if(posMarginTop==-455 && posMarginLeft<915)
+                                {
+                                    element.style.marginLeft=(posMarginLeft+50)+"px";
+                                        posMarginLeft+=50;
+                                }
+                                //
+                                else if(posMarginLeft==915 && posMarginTop<-355)
+                                {
+                                    element.style.marginTop=(posMarginTop+50)+"px";
+                                        posMarginTop+=50;
+                                }
+                                //
+                                else if(posMarginTop==-355 && posMarginLeft>665)
+                                {
+                                    element.style.marginLeft=(posMarginLeft-50)+"px";
+                                        posMarginLeft-=50;
+                                }
+                                else if(posMarginTop==-355 && posMarginLeft==665)
+                                {
+                                    element.style.marginLeft=(posMarginLeft-50)+"px";
+                                        posMarginLeft-=50;
+                                    element.style.marginTop=(posMarginTop+60)+"px";
+                                        posMarginTop+=60;
+                                }
+                                else if(posMarginLeft==615 && posMarginTop<-45)
+                                {
+                                    element.style.marginTop=(posMarginTop+50)+"px";
+                                        posMarginTop+=50;
+                                }
+                                //
+                                else if(posMarginTop==-45 && posMarginLeft>505)
+                                {
+                                    element.style.marginLeft=(posMarginLeft-55)+"px";
+                                        posMarginLeft-=55;
+                                }
+                                //
+                                else if(posMarginLeft==505 && posMarginTop>-295)
+                                {
+                                    element.style.marginTop=(posMarginTop-50)+"px";
+                                        posMarginTop-=50;
+                                }
+                                else if(posMarginLeft==505 && posMarginTop==-295)
+                                {
+                                    element.style.marginTop=(posMarginTop-50)+"px";
+                                        posMarginTop-=50;
+                                    element.style.marginLeft=(posMarginLeft-50)+"px";
+                                        posMarginLeft-=50;
+                                }
+                                else if(posMarginTop==-345 && posMarginLeft>205)
+                                {
+                                    element.style.marginLeft=(posMarginLeft-50)+"px";
+                                        posMarginLeft-=50;
+                                }
+                                else if(posMarginLeft==205 && posMarginTop>-455)
+                                {
+                                    element.style.marginTop=(posMarginTop-55)+"px";
+                                        posMarginTop-=55;
+                                }
+
+                             }
+                                //The remaining into the home part
+                                if(posMarginLeft==555 && posMarginTop<-455)
+                                {
+                                    if(VirtualDiceNum<=finalDiceNum)
+                                    { element.style.marginTop=(posMarginTop+(VirtualDiceNum*50))+"px";
+                                        posMarginTop+=(VirtualDiceNum*50);}
+                                }
+
+                                if(posMarginLeft==555 && posMarginTop==-455) 
+                                    {Gwin++; Gout--;}  
+
+                                    if(prevDiceRollNum==6 && diceRollNum!=6)
+                                    {   
+                                        if(turnNum>=playerNum && playerNum==2) turnNum=0;
+                                         turnNum++;
+                                    }
+                                    else if(prevDiceRollNum!=6 && diceRollNum!=6 && Gout>0)
+                                    {   
+                                        if(turnNum>=playerNum && playerNum==2) turnNum=0;
+                                         turnNum++;
+                                    }
+                                turnFunCon();
+                                isdiceRoll=false;
+                                numplay++;
+                                
+                        }
+
+                    }
+
+                    finalDiceNum=(posMarginLeft-615)/50;//For Y's home coming
+                    if(turnNum==3 &&(Id=="YC1" || Id=="YC2" || Id=="YC3" || Id=="YC4"))
+                    {  
+                        if(diceRollNum==6 && (posMarginTop==-220 || posMarginTop==-120) && (posMarginLeft==740 || posMarginLeft==840) && numplay==0)
+                        {   
+                            document.getElementById(Id).style.marginTop="-355px";
+                            document.getElementById(Id).style.marginLeft="865px";
+                            Yout++;
+                            isdiceRoll=false;
+                            numplay++;
+                        }
+                        else if(numplay==0 && Yout>0)
+                        {
+                             for(var i=1;i<=diceRollNum;i++)
+                            {   
+                                if(posMarginTop==-455 && posMarginLeft<455)
+                                {
+                                    element.style.marginLeft=(posMarginLeft+50)+"px";
+                                        posMarginLeft+=50;
+                                }
+                                else if(posMarginTop==-455 && posMarginLeft==455)
+                                {
+                                    element.style.marginLeft=(posMarginLeft+50)+"px";
+                                        posMarginLeft+=50;
+                                    element.style.marginTop=(posMarginTop-50)+"px";
+                                        posMarginTop-=50;
+                                }
+                                else if(posMarginLeft==505 && posMarginTop>-755 && posMarginTop<-455)
+                                {
+                                    element.style.marginTop=(posMarginTop-50)+"px";
+                                        posMarginTop-=50;
+                                }
+                                //
+                                else if(posMarginTop==-755 && posMarginLeft<605)
+                                {
+                                    element.style.marginLeft=(posMarginLeft+50)+"px";
+                                        posMarginLeft+=50;
+                                }
+                                //
+                                else if(posMarginLeft==605 && posMarginTop<-505)
+                                {
+                                    element.style.marginTop=(posMarginTop+50)+"px";
+                                        posMarginTop+=50;
+                                }
+                                else if(posMarginLeft==605 && posMarginTop==-505)
+                                {
+                                    element.style.marginTop=(posMarginTop+50)+"px";
+                                        posMarginTop+=50;
+                                    element.style.marginLeft=(posMarginLeft+60)+"px";
+                                        posMarginLeft+=60;
+                                }
+                                else if(posMarginTop==-455 && posMarginLeft<915)
+                                {
+                                    element.style.marginLeft=(posMarginLeft+50)+"px";
+                                        posMarginLeft+=50;
+                                        VirtualDiceNum--;
+                                }
+                                //############ Entering into the home part
+                                else if(posMarginLeft==915 && posMarginTop==-455)
+                                {
+                                    element.style.marginTop=(posMarginTop+50)+"px";
+                                        posMarginTop+=50;
+                                        VirtualDiceNum--;
+                                }
+                                //#####################
+                                else if(posMarginTop==-355 && posMarginLeft>665)
+                                {
+                                    element.style.marginLeft=(posMarginLeft-50)+"px";
+                                        posMarginLeft-=50;
+                                }
+                                else if(posMarginTop==-355 && posMarginLeft==665)
+                                {
+                                    element.style.marginLeft=(posMarginLeft-50)+"px";
+                                        posMarginLeft-=50;
+                                    element.style.marginTop=(posMarginTop+60)+"px";
+                                        posMarginTop+=60;
+                                }
+                                else if(posMarginLeft==615 && posMarginTop<-45)
+                                {
+                                    element.style.marginTop=(posMarginTop+50)+"px";
+                                        posMarginTop+=50;
+                                }
+                                //
+                                else if(posMarginTop==-45 && posMarginLeft>505)
+                                {
+                                    element.style.marginLeft=(posMarginLeft-55)+"px";
+                                        posMarginLeft-=55;
+                                }
+                                //
+                                else if(posMarginLeft==505 && posMarginTop>-295)
+                                {
+                                    element.style.marginTop=(posMarginTop-50)+"px";
+                                        posMarginTop-=50;
+                                }
+                                else if(posMarginLeft==505 && posMarginTop==-295)
+                                {
+                                    element.style.marginTop=(posMarginTop-50)+"px";
+                                        posMarginTop-=50;
+                                    element.style.marginLeft=(posMarginLeft-50)+"px";
+                                        posMarginLeft-=50;
+                                }
+                                else if(posMarginTop==-345 && posMarginLeft>205)
+                                {
+                                    element.style.marginLeft=(posMarginLeft-50)+"px";
+                                        posMarginLeft-=50;
+                                }
+                                else if(posMarginLeft==205 && posMarginTop>-455)
+                                {
+                                    element.style.marginTop=(posMarginTop-55)+"px";
+                                        posMarginTop-=55;
+                                }
+
+                            }
+                                //Remaining into the home part
+                                if(posMarginTop==-405 && posMarginLeft>615)
+                                {
+                                    if(VirtualDiceNum<=finalDiceNum)
+                                    { element.style.marginLeft=(posMarginLeft-(VirtualDiceNum*50))+"px";
+                                        posMarginLeft-=(VirtualDiceNum*50);}
+                                }
+
+                                    if(posMarginTop==-405 && posMarginLeft==615)    
+                                        {Ywin++; Yout--;}
+
+                                    if(prevDiceRollNum==6 && diceRollNum!=6)
+                                    {   
+                                        if(turnNum>=playerNum && playerNum==3) turnNum=0;
+                                         turnNum++; 
+                                    }
+                                    else if(prevDiceRollNum!=6 && diceRollNum!=6 && Yout>0)
+                                    {   
+                                        if(turnNum>=playerNum && playerNum==3) turnNum=0;
+                                         turnNum++;
+                                    }
+                                turnFunCon();
+                               
+                                isdiceRoll=false;
+                                numplay++;
+                                
+                        }
+
+                    }
+
+                    finalDiceNum=(posMarginTop+345)/50;//For B's home coming
+                    if(turnNum==4 &&(Id=="BC1" || Id=="BC2" || Id=="BC3" || Id=="BC4"))
+                    {   
+                        if(diceRollNum==6  && (posMarginTop==-220 || posMarginTop==-120) && (posMarginLeft==280 || posMarginLeft==380) && numplay==0)
+                        {    
+                             document.getElementById(Id).style.marginTop="-95px";
+                             document.getElementById(Id).style.marginLeft="505px";
+                             Bout++;
+                             isdiceRoll=false;
+                             numplay++;
+                        }
+                        else if(numplay==0 && Bout>0)
+                        {
+                            for(var i=1;i<=diceRollNum;i++)
+                            {   
+                                if(posMarginTop==-455 && posMarginLeft<455)
+                                {
+                                    element.style.marginLeft=(posMarginLeft+50)+"px";
+                                        posMarginLeft+=50;
+                                }
+                                else if(posMarginTop==-455 && posMarginLeft==455)
+                                {
+                                    element.style.marginLeft=(posMarginLeft+50)+"px";
+                                        posMarginLeft+=50;
+                                    element.style.marginTop=(posMarginTop-50)+"px";
+                                        posMarginTop-=50;
+                                }
+                                else if(posMarginLeft==505 && posMarginTop>-755 && posMarginTop<-455)
+                                {
+                                    element.style.marginTop=(posMarginTop-50)+"px";
+                                        posMarginTop-=50;
+                                }
+                                //
+                                else if(posMarginTop==-755 && posMarginLeft<605)
+                                {
+                                    element.style.marginLeft=(posMarginLeft+50)+"px";
+                                        posMarginLeft+=50;
+                                }
+                                //
+                                else if(posMarginLeft==605 && posMarginTop<-505)
+                                {
+                                    element.style.marginTop=(posMarginTop+50)+"px";
+                                        posMarginTop+=50;
+                                }
+                                else if(posMarginLeft==605 && posMarginTop==-505)
+                                {
+                                    element.style.marginTop=(posMarginTop+50)+"px";
+                                        posMarginTop+=50;
+                                    element.style.marginLeft=(posMarginLeft+60)+"px";
+                                        posMarginLeft+=60;
+                                }
+                                else if(posMarginTop==-455 && posMarginLeft<915)
+                                {
+                                    element.style.marginLeft=(posMarginLeft+50)+"px";
+                                        posMarginLeft+=50;
+                                }
+                                //
+                                else if(posMarginLeft==915 && posMarginTop<-355)
+                                {
+                                    element.style.marginTop=(posMarginTop+50)+"px";
+                                        posMarginTop+=50;
+                                }
+                                //
+                                else if(posMarginTop==-355 && posMarginLeft>665)
+                                {
+                                    element.style.marginLeft=(posMarginLeft-50)+"px";
+                                        posMarginLeft-=50;
+                                }
+                                else if(posMarginTop==-355 && posMarginLeft==665)
+                                {
+                                    element.style.marginLeft=(posMarginLeft-50)+"px";
+                                        posMarginLeft-=50;
+                                    element.style.marginTop=(posMarginTop+60)+"px";
+                                        posMarginTop+=60;
+                                }
+                                else if(posMarginLeft==615 && posMarginTop<-45)
+                                {
+                                    element.style.marginTop=(posMarginTop+50)+"px";
+                                        posMarginTop+=50;
+                                        VirtualDiceNum--;
+                                }
+                                //############ Entering into the home part
+                                else if(posMarginTop==-45 && posMarginLeft==615)
+                                {
+                                    element.style.marginLeft=(posMarginLeft-55)+"px";
+                                        posMarginLeft-=55;
+                                        VirtualDiceNum--;
+                                }
+                                //########################
+                                else if(posMarginLeft==505 && posMarginTop>-295)
+                                {
+                                    element.style.marginTop=(posMarginTop-50)+"px";
+                                        posMarginTop-=50;
+                                }
+                                else if(posMarginLeft==505 && posMarginTop==-295)
+                                {
+                                    element.style.marginTop=(posMarginTop-50)+"px";
+                                        posMarginTop-=50;
+                                    element.style.marginLeft=(posMarginLeft-50)+"px";
+                                        posMarginLeft-=50;
+                                }
+                                else if(posMarginTop==-345 && posMarginLeft>205)
+                                {
+                                    element.style.marginLeft=(posMarginLeft-50)+"px";
+                                        posMarginLeft-=50;
+                                }
+                                else if(posMarginLeft==205 && posMarginTop>-455)
+                                {
+                                    element.style.marginTop=(posMarginTop-55)+"px";
+                                        posMarginTop-=55;
+                                }
+                            }
+                                    
+                                 if(posMarginLeft==560 && posMarginTop>-345)
+                                {
+                                    if(VirtualDiceNum<=finalDiceNum)
+                                    { element.style.marginTop=(posMarginTop-(VirtualDiceNum*50))+"px";
+                                        posMarginTop-=(VirtualDiceNum*50);}
+                                }
+                            
+                                    if(posMarginLeft==560 && posMarginTop==-345)
+                                        {Bwin++; Bout--;}
+
+                                    if(prevDiceRollNum==6 && diceRollNum!=6)
+                                    {   
+                                        if(turnNum>=playerNum && playerNum==4) turnNum=0;
+                                        turnNum++;
+                                    }
+                                    else if(prevDiceRollNum!=6 && diceRollNum!=6 && Bout>0)
+                                    {   if(turnNum>=playerNum && playerNum==4) turnNum=0;
+                                         turnNum++;
+                                    }
+                                turnFunCon();
+                                isdiceRoll=false;
+                                numplay++;
+                        }
+                        
+                    }
+
+                }    
+
+                //This is to check is the coins are safe or not
+                if((posMarginLeft==255 && posMarginTop==-455) || (posMarginLeft==605 && posMarginTop==-705) || (posMarginLeft==865 && posMarginTop==-355) || (posMarginLeft==505 && posMarginTop==-95) || (posMarginLeft==505 && posMarginTop==-655) || (posMarginLeft==815 && posMarginTop==-455) || (posMarginLeft==615 && posMarginTop==-145) || (posMarginLeft==305 && posMarginTop==-345))
+                {
+                    if(Id=="RC1") RSafe[0]=true;
+                    else if(Id=="RC2") RSafe[1]=true;
+                    else if(Id=="RC3") RSafe[2]=true;
+                    else if(Id=="RC4") RSafe[3]=true;
+                    else if(Id=="GC1") GSafe[0]=true;
+                    else if(Id=="GC2") GSafe[1]=true;
+                    else if(Id=="GC3") GSafe[2]=true;
+                    else if(Id=="GC4") GSafe[3]=true;
+                    else if(Id=="YC1") YSafe[0]=true;
+                    else if(Id=="YC2") YSafe[1]=true;
+                    else if(Id=="YC3") YSafe[2]=true;
+                    else if(Id=="YC4") YSafe[3]=true;
+                    else if(Id=="BC1") BSafe[0]=true;
+                    else if(Id=="BC2") BSafe[1]=true;
+                    else if(Id=="BC3") BSafe[2]=true;
+                    else if(Id=="BC4") BSafe[3]=true;
+                }
+                else 
+                {
+                    if(Id=="RC1") RSafe[0]=false;
+                    else if(Id=="RC2") RSafe[1]=false;
+                    else if(Id=="RC3") RSafe[2]=false;
+                    else if(Id=="RC4") RSafe[3]=false;
+                    else if(Id=="GC1") GSafe[0]=false;
+                    else if(Id=="GC2") GSafe[1]=false;
+                    else if(Id=="GC3") GSafe[2]=false;
+                    else if(Id=="GC4") GSafe[3]=false;
+                    else if(Id=="YC1") YSafe[0]=false;
+                    else if(Id=="YC2") YSafe[1]=false;
+                    else if(Id=="YC3") YSafe[2]=false;
+                    else if(Id=="YC4") YSafe[3]=false;
+                    else if(Id=="BC1") BSafe[0]=false;
+                    else if(Id=="BC2") BSafe[1]=false;
+                    else if(Id=="BC3") BSafe[2]=false;
+                    else if(Id=="BC4") BSafe[3]=false;
+                }
+
+                //#################################
+                //This is for the killing the coins by the other coins
+
+                ////////For R
+                if(Id=="RC1" || Id=="RC2" || Id=="RC3" || Id=="RC4")
+                {  
+                    if((posMarginTop+"px")==window.getComputedStyle(document.getElementById("GC1")).marginTop && (posMarginLeft+"px")==window.getComputedStyle(document.getElementById("GC1")).marginLeft && GSafe[0]==false)
+                    {
+                        document.getElementById("GC1").style.marginTop="-680px";
+                        document.getElementById("GC1").style.marginLeft="740px";
+                        Gout--;
+                    }
+                    else if((posMarginTop+"px")==window.getComputedStyle(document.getElementById("GC2")).marginTop && (posMarginLeft+"px")==window.getComputedStyle(document.getElementById("GC2")).marginLeft && GSafe[1]==false)
+                    {
+                        document.getElementById("GC2").style.marginTop="-680px";
+                        document.getElementById("GC2").style.marginLeft="840px";
+                        Gout--;
+                    }
+                    else if((posMarginTop+"px")==window.getComputedStyle(document.getElementById("GC3")).marginTop && (posMarginLeft+"px")==window.getComputedStyle(document.getElementById("GC3")).marginLeft && GSafe[2]==false)
+                    {
+                        document.getElementById("GC3").style.marginTop="-580px";
+                        document.getElementById("GC3").style.marginLeft="740px";
+                        Gout--;
+                    }
+                    else if((posMarginTop+"px")==window.getComputedStyle(document.getElementById("GC4")).marginTop && (posMarginLeft+"px")==window.getComputedStyle(document.getElementById("GC4")).marginLeft && GSafe[3]==false)
+                    {
+                        document.getElementById("GC4").style.marginTop="-580px";
+                        document.getElementById("GC4").style.marginLeft="840px";
+                        Gout--;
+                    }
+
+                    //####################################
+                    else if((posMarginTop+"px")==window.getComputedStyle(document.getElementById("YC1")).marginTop && (posMarginLeft+"px")==window.getComputedStyle(document.getElementById("YC1")).marginLeft && YSafe[0]==false)
+                    {
+                        document.getElementById("YC1").style.marginTop="-220px";
+                        document.getElementById("YC1").style.marginLeft="740px";
+                        Yout--;
+                    }
+                    else if((posMarginTop+"px")==window.getComputedStyle(document.getElementById("YC2")).marginTop && (posMarginLeft+"px")==window.getComputedStyle(document.getElementById("YC2")).marginLeft && YSafe[1]==false)
+                    {
+                        document.getElementById("YC2").style.marginTop="-220px";
+                        document.getElementById("YC2").style.marginLeft="840px";
+                        Yout--;
+                    }
+                    else if((posMarginTop+"px")==window.getComputedStyle(document.getElementById("YC3")).marginTop && (posMarginLeft+"px")==window.getComputedStyle(document.getElementById("YC3")).marginLeft && YSafe[2]==false)
+                    {
+                        document.getElementById("YC3").style.marginTop="-120px";
+                        document.getElementById("YC3").style.marginLeft="740px";
+                        Yout--;
+                    }
+                    else if((posMarginTop+"px")==window.getComputedStyle(document.getElementById("YC4")).marginTop && (posMarginLeft+"px")==window.getComputedStyle(document.getElementById("YC4")).marginLeft && YSafe[3]==false)
+                    {
+                        document.getElementById("YC4").style.marginTop="-120px";
+                        document.getElementById("YC4").style.marginLeft="840px";
+                        Yout--;
+                    }
+
+                    
+                    else if((posMarginTop+"px")==window.getComputedStyle(document.getElementById("BC1")).marginTop && (posMarginLeft+"px")==window.getComputedStyle(document.getElementById("BC1")).marginLeft && BSafe[0]==false)
+                    {
+                        document.getElementById("BC1").style.marginTop="-220px";
+                        document.getElementById("BC1").style.marginLeft="280px";
+                        Bout--;
+                    }
+                    else if((posMarginTop+"px")==window.getComputedStyle(document.getElementById("BC2")).marginTop && (posMarginLeft+"px")==window.getComputedStyle(document.getElementById("BC2")).marginLeft && BSafe[1]==false)
+                    {
+                        document.getElementById("BC2").style.marginTop="-220px";
+                        document.getElementById("BC2").style.marginLeft="380px";
+                        Bout--;
+                    }
+                    else if((posMarginTop+"px")==window.getComputedStyle(document.getElementById("BC3")).marginTop && (posMarginLeft+"px")==window.getComputedStyle(document.getElementById("BC3")).marginLeft && BSafe[2]==false)
+                    {
+                        document.getElementById("BC3").style.marginTop="-120px";
+                        document.getElementById("BC3").style.marginLeft="280px";
+                        Bout--;
+                    }
+                    else if((posMarginTop+"px")==window.getComputedStyle(document.getElementById("BC4")).marginTop && (posMarginLeft+"px")==window.getComputedStyle(document.getElementById("BC4")).marginLeft && BSafe[3]==false)
+                    {
+                        document.getElementById("BC4").style.marginTop="-120px";
+                        document.getElementById("BC4").style.marginLeft="380px";
+                        Bout--;
+                    }
+                } 
+                else if(Id=="GC1" || Id=="GC2" || Id=="GC3" || Id=="GC4")
+                {   
+                    if((posMarginTop+"px")==window.getComputedStyle(document.getElementById("RC1")).marginTop && (posMarginLeft+"px")==window.getComputedStyle(document.getElementById("RC1")).marginLeft && RSafe[0]==false)
+                    {
+                        document.getElementById("RC1").style.marginTop="-680px";
+                        document.getElementById("RC1").style.marginLeft="280px";
+                        Rout--;
+                    }
+                    else if((posMarginTop+"px")==window.getComputedStyle(document.getElementById("RC2")).marginTop && (posMarginLeft+"px")==window.getComputedStyle(document.getElementById("RC2")).marginLeft && RSafe[1]==false)
+                    {
+                        document.getElementById("RC2").style.marginTop="-680px";
+                        document.getElementById("RC2").style.marginLeft="380px";
+                        Rout--;
+                    }
+                    else if((posMarginTop+"px")==window.getComputedStyle(document.getElementById("RC3")).marginTop && (posMarginLeft+"px")==window.getComputedStyle(document.getElementById("RC3")).marginLeft && RSafe[2]==false)
+                    {
+                        document.getElementById("RC3").style.marginTop="-580px";
+                        document.getElementById("RC3").style.marginLeft="280px";
+                        Rout--;
+                    }
+                    else if((posMarginTop+"px")==window.getComputedStyle(document.getElementById("RC4")).marginTop && (posMarginLeft+"px")==window.getComputedStyle(document.getElementById("RC4")).marginLeft && RSafe[3]==false)
+                    {
+                        document.getElementById("RC4").style.marginTop="-580px";
+                        document.getElementById("RC4").style.marginLeft="380px";
+                        Rout--;
+                    }
+
+                    else if((posMarginTop+"px")==window.getComputedStyle(document.getElementById("YC1")).marginTop && (posMarginLeft+"px")==window.getComputedStyle(document.getElementById("YC1")).marginLeft && YSafe[0]==false)
+                    {
+                        document.getElementById("YC1").style.marginTop="-220px";
+                        document.getElementById("YC1").style.marginLeft="740px";
+                        Yout--;
+                    }
+                    else if((posMarginTop+"px")==window.getComputedStyle(document.getElementById("YC2")).marginTop && (posMarginLeft+"px")==window.getComputedStyle(document.getElementById("YC2")).marginLeft && YSafe[1]==false)
+                    {
+                        document.getElementById("YC2").style.marginTop="-220px";
+                        document.getElementById("YC2").style.marginLeft="840px";
+                        Yout--;
+                    }
+                    else if((posMarginTop+"px")==window.getComputedStyle(document.getElementById("YC3")).marginTop && (posMarginLeft+"px")==window.getComputedStyle(document.getElementById("YC3")).marginLeft && YSafe[2]==false)
+                    {
+                        document.getElementById("YC3").style.marginTop="-120px";
+                        document.getElementById("YC3").style.marginLeft="740px";
+                        Yout--;
+                    }
+                    else if((posMarginTop+"px")==window.getComputedStyle(document.getElementById("YC4")).marginTop && (posMarginLeft+"px")==window.getComputedStyle(document.getElementById("YC4")).marginLeft && YSafe[3]==false)
+                    {
+                        document.getElementById("YC4").style.marginTop="-120px";
+                        document.getElementById("YC4").style.marginLeft="840px";
+                        Yout--;
+                    }
+
+                    else if((posMarginTop+"px")==window.getComputedStyle(document.getElementById("BC1")).marginTop && (posMarginLeft+"px")==window.getComputedStyle(document.getElementById("BC1")).marginLeft && BSafe[0]==false)
+                    {
+                        document.getElementById("BC1").style.marginTop="-220px";
+                        document.getElementById("BC1").style.marginLeft="280px";
+                        Bout--;
+                    }
+                    else if((posMarginTop+"px")==window.getComputedStyle(document.getElementById("BC2")).marginTop && (posMarginLeft+"px")==window.getComputedStyle(document.getElementById("BC2")).marginLeft && BSafe[1]==false)
+                    {
+                        document.getElementById("BC2").style.marginTop="-220px";
+                        document.getElementById("BC2").style.marginLeft="380px";
+                        Bout--;
+                    }
+                    else if((posMarginTop+"px")==window.getComputedStyle(document.getElementById("BC3")).marginTop && (posMarginLeft+"px")==window.getComputedStyle(document.getElementById("BC3")).marginLeft && BSafe[2]==false)
+                    {
+                        document.getElementById("BC3").style.marginTop="-120px";
+                        document.getElementById("BC3").style.marginLeft="280px";
+                        Bout--;
+                    }
+                    else if((posMarginTop+"px")==window.getComputedStyle(document.getElementById("BC4")).marginTop && (posMarginLeft+"px")==window.getComputedStyle(document.getElementById("BC4")).marginLeft && BSafe[3]==false)
+                    {
+                        document.getElementById("BC4").style.marginTop="-120px";
+                        document.getElementById("BC4").style.marginLeft="380px";
+                        Bout--;
+                    }
+                }
+                
+                
+                ////////// For Y
+                else if(Id=="YC1" || Id=="YC2" || Id=="YC3" || Id=="YC4")
+                {   
+                    if((posMarginTop+"px")==window.getComputedStyle(document.getElementById("RC1")).marginTop && (posMarginLeft+"px")==window.getComputedStyle(document.getElementById("RC1")).marginLeft && RSafe[0]==false)
+                    {
+                        document.getElementById("RC1").style.marginTop="-680px";
+                        document.getElementById("RC1").style.marginLeft="280px";
+                        Rout--;
+                    }
+                    else if((posMarginTop+"px")==window.getComputedStyle(document.getElementById("RC2")).marginTop && (posMarginLeft+"px")==window.getComputedStyle(document.getElementById("RC2")).marginLeft && RSafe[1]==false)
+                    {
+                        document.getElementById("RC2").style.marginTop="-680px";
+                        document.getElementById("RC2").style.marginLeft="380px";
+                        Rout--;
+                    }
+                    else if((posMarginTop+"px")==window.getComputedStyle(document.getElementById("RC3")).marginTop && (posMarginLeft+"px")==window.getComputedStyle(document.getElementById("RC3")).marginLeft && RSafe[2]==false)
+                    {
+                        document.getElementById("RC3").style.marginTop="-580px";
+                        document.getElementById("RC3").style.marginLeft="280px";
+                        Rout--;
+                    }
+                    else if((posMarginTop+"px")==window.getComputedStyle(document.getElementById("RC4")).marginTop && (posMarginLeft+"px")==window.getComputedStyle(document.getElementById("RC4")).marginLeft && RSafe[3]==false)
+                    {
+                        document.getElementById("RC4").style.marginTop="-580px";
+                        document.getElementById("RC4").style.marginLeft="380px";
+                        Rout--;
+                    }
+
+                    //####################################
+                    else if((posMarginTop+"px")==window.getComputedStyle(document.getElementById("GC1")).marginTop && (posMarginLeft+"px")==window.getComputedStyle(document.getElementById("GC1")).marginLeft && GSafe[0]==false)
+                    {
+                        document.getElementById("GC1").style.marginTop="-680px";
+                        document.getElementById("GC1").style.marginLeft="740px";
+                        Gout--;
+                    }
+                    else if((posMarginTop+"px")==window.getComputedStyle(document.getElementById("GC2")).marginTop && (posMarginLeft+"px")==window.getComputedStyle(document.getElementById("GC2")).marginLeft && GSafe[1]==false)
+                    {
+                        document.getElementById("GC2").style.marginTop="-680px";
+                        document.getElementById("GC2").style.marginLeft="840px";
+                        Gout--;
+                    }
+                    else if((posMarginTop+"px")==window.getComputedStyle(document.getElementById("GC3")).marginTop && (posMarginLeft+"px")==window.getComputedStyle(document.getElementById("GC3")).marginLeft && GSafe[2]==false)
+                    {
+                        document.getElementById("GC3").style.marginTop="-580px";
+                        document.getElementById("GC3").style.marginLeft="740px";
+                        Gout--;
+                    }
+                    else if((posMarginTop+"px")==window.getComputedStyle(document.getElementById("GC4")).marginTop && (posMarginLeft+"px")==window.getComputedStyle(document.getElementById("GC4")).marginLeft && GSafe[3]==false)
+                    {
+                        document.getElementById("GC4").style.marginTop="-580px";
+                        document.getElementById("GC4").style.marginLeft="840px";
+                        Gout--;
+                    }
+
+                    //##########################################
+                    else if((posMarginTop+"px")==window.getComputedStyle(document.getElementById("BC1")).marginTop && (posMarginLeft+"px")==window.getComputedStyle(document.getElementById("BC1")).marginLeft && BSafe[0]==false)
+                    {
+                        document.getElementById("BC1").style.marginTop="-220px";
+                        document.getElementById("BC1").style.marginLeft="280px";
+                        Bout--;
+                    }
+                    else if((posMarginTop+"px")==window.getComputedStyle(document.getElementById("BC2")).marginTop && (posMarginLeft+"px")==window.getComputedStyle(document.getElementById("BC2")).marginLeft && BSafe[1]==false)
+                    {
+                        document.getElementById("BC2").style.marginTop="-220px";
+                        document.getElementById("BC2").style.marginLeft="380px";
+                        Bout--;
+                    }
+                    else if((posMarginTop+"px")==window.getComputedStyle(document.getElementById("BC3")).marginTop && (posMarginLeft+"px")==window.getComputedStyle(document.getElementById("BC3")).marginLeft && BSafe[2]==false)
+                    {
+                        document.getElementById("BC3").style.marginTop="-120px";
+                        document.getElementById("BC3").style.marginLeft="280px";
+                        Bout--;
+                    }
+                    else if((posMarginTop+"px")==window.getComputedStyle(document.getElementById("BC4")).marginTop && (posMarginLeft+"px")==window.getComputedStyle(document.getElementById("BC4")).marginLeft && BSafe[3]==false)
+                    {
+                        document.getElementById("BC4").style.marginTop="-120px";
+                        document.getElementById("BC4").style.marginLeft="380px";
+                        Bout--;
+                    }
+                }
+
+
+                ////////////////// For B
+                else if(Id=="BC1" || Id=="BC2" || Id=="BC3" || Id=="BC4")
+                {   
+                    if((posMarginTop+"px")==window.getComputedStyle(document.getElementById("RC1")).marginTop && (posMarginLeft+"px")==window.getComputedStyle(document.getElementById("RC1")).marginLeft && RSafe[0]==false)
+                    {
+                        document.getElementById("RC1").style.marginTop="-680px";
+                        document.getElementById("RC1").style.marginLeft="280px";
+                        Rout--;
+                    }
+                    else if((posMarginTop+"px")==window.getComputedStyle(document.getElementById("RC2")).marginTop && (posMarginLeft+"px")==window.getComputedStyle(document.getElementById("RC2")).marginLeft && RSafe[1]==false)
+                    {
+                        document.getElementById("RC2").style.marginTop="-680px";
+                        document.getElementById("RC2").style.marginLeft="380px";
+                        Rout--;
+                    }
+                    else if((posMarginTop+"px")==window.getComputedStyle(document.getElementById("RC3")).marginTop && (posMarginLeft+"px")==window.getComputedStyle(document.getElementById("RC3")).marginLeft && RSafe[2]==false)
+                    {
+                        document.getElementById("RC3").style.marginTop="-580px";
+                        document.getElementById("RC3").style.marginLeft="280px";
+                        Rout--;
+                    }
+                    else if((posMarginTop+"px")==window.getComputedStyle(document.getElementById("RC4")).marginTop && (posMarginLeft+"px")==window.getComputedStyle(document.getElementById("RC4")).marginLeft && RSafe[3]==false)
+                    {
+                        document.getElementById("RC4").style.marginTop="-580px";
+                        document.getElementById("RC4").style.marginLeft="380px";
+                        Rout--;
+                    }
+
+                    //####################################
+                    else if((posMarginTop+"px")==window.getComputedStyle(document.getElementById("GC1")).marginTop && (posMarginLeft+"px")==window.getComputedStyle(document.getElementById("GC1")).marginLeft && GSafe[0]==false)
+                    {
+                        document.getElementById("GC1").style.marginTop="-680px";
+                        document.getElementById("GC1").style.marginLeft="740px";
+                        Gout--;
+                    }
+                    else if((posMarginTop+"px")==window.getComputedStyle(document.getElementById("GC2")).marginTop && (posMarginLeft+"px")==window.getComputedStyle(document.getElementById("GC2")).marginLeft && GSafe[1]==false)
+                    {
+                        document.getElementById("GC2").style.marginTop="-680px";
+                        document.getElementById("GC2").style.marginLeft="840px";
+                        Gout--;
+                    }
+                    else if((posMarginTop+"px")==window.getComputedStyle(document.getElementById("GC3")).marginTop && (posMarginLeft+"px")==window.getComputedStyle(document.getElementById("GC3")).marginLeft && GSafe[2]==false)
+                    {
+                        document.getElementById("GC3").style.marginTop="-580px";
+                        document.getElementById("GC3").style.marginLeft="740px";
+                        Gout--;
+                    }
+                    else if((posMarginTop+"px")==window.getComputedStyle(document.getElementById("GC4")).marginTop && (posMarginLeft+"px")==window.getComputedStyle(document.getElementById("GC4")).marginLeft && GSafe[3]==false)
+                    {
+                        document.getElementById("GC4").style.marginTop="-580px";
+                        document.getElementById("GC4").style.marginLeft="840px";
+                        Gout--;
+                    }
+
+                    //##########################################
+                    else if((posMarginTop+"px")==window.getComputedStyle(document.getElementById("YC1")).marginTop && (posMarginLeft+"px")==window.getComputedStyle(document.getElementById("YC1")).marginLeft && YSafe[0]==false)
+                    {
+                        document.getElementById("YC1").style.marginTop="-220px";
+                        document.getElementById("YC1").style.marginLeft="740px";
+                        Yout--;
+                    }
+                    else if((posMarginTop+"px")==window.getComputedStyle(document.getElementById("YC2")).marginTop && (posMarginLeft+"px")==window.getComputedStyle(document.getElementById("YC2")).marginLeft && YSafe[1]==false)
+                    {
+                        document.getElementById("YC2").style.marginTop="-220px";
+                        document.getElementById("YC2").style.marginLeft="840px";
+                        Yout--;
+                    }
+                    else if((posMarginTop+"px")==window.getComputedStyle(document.getElementById("YC3")).marginTop && (posMarginLeft+"px")==window.getComputedStyle(document.getElementById("YC3")).marginLeft && YSafe[2]==false)
+                    {
+                        document.getElementById("YC3").style.marginTop="-120px";
+                        document.getElementById("YC3").style.marginLeft="740px";
+                        Yout--;
+                    }
+                    else if((posMarginTop+"px")==window.getComputedStyle(document.getElementById("YC4")).marginTop && (posMarginLeft+"px")==window.getComputedStyle(document.getElementById("YC4")).marginLeft && YSafe[3]==false)
+                    {
+                        document.getElementById("YC4").style.marginTop="-120px";
+                        document.getElementById("YC4").style.marginLeft="840px";
+                        Yout--;
+                    }
+                }
+
+            }
+
+            //This function is for the conversion of pix to its value in number i.e "200px" to 200
+            function pixNum(str)
+            {
+                var i=0,numStr="";
+                do{
+                    numStr+=str.charAt(i);
+                        i++;
+                }while(str.charAt(i)!='p');
+                
+                return parseInt(numStr);
+            }
+
+        </script>
+
+    </body>
+</html>
